@@ -1,0 +1,35 @@
+### Добавление
+POST http://localhost:8080/api/addAircraft
+Content-Type: application/json
+
+{
+  "model": "TU-104",
+  "manufacturer": "Tupolev",
+  "releaseYear": 2008,
+  "seats": 120,
+  "status": "Active"
+}
+
+### Выборка с пагинацией
+POST http://localhost:8080/api/getAircrafts
+Content-Type: application/json
+
+{
+  "model": "TU-104",
+  "manufacturer": "Tupolev",
+  "pageNum": 1,
+  "pageSize": 5
+}
+
+### Обновление
+POST http://localhost:8080/api/updateAircraft
+Content-Type: application/json
+
+{
+  "id": 3,
+  "model": "TU-134",
+  "manufacturer": "Tupolev",
+  "releaseYear": 2018,
+  "seats": 145,
+  "status": "Active"
+}

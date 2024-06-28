@@ -8,7 +8,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface AircraftDtoRsMapper {
 
-    @Mapping(target = "statusCode", ignore = true)
-    @Mapping(target = "statusText", ignore = true)
+    @Mapping(target = "statusCode", constant = "0")
+    @Mapping(target = "statusText", constant = "Ok")
     AircraftRs map(AircraftListDto aircraftListDto);
 }
