@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: aircraft-table-seq #текстовый идентификатор (Обязателен)
+      author: twin # автор (Обязателен)
+      changes:
+        - createSequence:
+            sequenceName: aircraft_seq
+            minValue: 1
+            startValue: 2
+            incrementBy: 1
+            cacheSize: 10

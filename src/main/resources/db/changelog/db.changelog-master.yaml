@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/table-aircraft.yaml
+  - include:
+      file: db/changelog/changeset/table-aircraft-seq.yaml

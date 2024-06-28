@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-test #текстовый идентификатор (Обязателен)
+      author: twin # автор (Обязателен)
+      changes:
+        - createTable: # создаем новую таблицу
+            tableName: test2
+            columns: # объявления колонок
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(200)

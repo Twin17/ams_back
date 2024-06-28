@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: aircraft-table-init #текстовый идентификатор (Обязателен)
+      author: twin # автор (Обязателен)
+      changes:
+        - createTable: # создаем новую таблицу
+            tableName: aircraft
+            columns: # объявления колонок
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: model
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: manufacturer
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: releaseyear
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: seats
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
