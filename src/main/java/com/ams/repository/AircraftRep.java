@@ -16,4 +16,6 @@ public interface AircraftRep {
     Long add(AircraftDto aircraftDto);
 
     Long update(AircraftDto aircraftDto);
+
+    void delete(AircraftDto aircraftDto);
 }

@@ -2,6 +2,8 @@ package com.ams.service;
 
 import com.ams.api.add.AircraftAddRq;
 import com.ams.api.add.AircraftAddRs;
+import com.ams.api.delete.AircraftDeleteRq;
+import com.ams.api.delete.AircraftDeleteRs;
 import com.ams.api.get.AircraftRq;
 import com.ams.api.get.AircraftRs;
 import com.ams.api.update.AircraftUpdateRq;
@@ -83,4 +85,19 @@ public class AircraftSrvImpl implements AircraftSrv {
 
         return response;
     }
+
+    @Override
+    public AircraftDeleteRs deleteAircraft(AircraftDeleteRq request) {
+        final AircraftDto aircraftDto = new AircraftDto();
+        aircraftDto.setId(request.getId());
+
+        aircraftRep.delete(aircraftDto);
+
+        final AircraftDeleteRs response = new AircraftDeleteRs();
+        response.setStatusCode(0);
+        response.setStatusText("Ok");
+
+        return response;
+    }
+
 }

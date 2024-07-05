@@ -109,4 +109,9 @@ public class AircraftRepImpl implements AircraftRep {
         return savedAircraft.getId();
     }
 
+    @Override
+    public void delete(AircraftDto aircraftDto) {
+        jpaRep.deleteById(aircraftDto.getId());
+    }
+
 }
