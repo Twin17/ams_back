@@ -33,3 +33,11 @@ Content-Type: application/json
   "seats": 145,
   "status": "Active"
 }
+
+### Удаление
+POST http://localhost:8080/api/deleteAircraft
+Content-Type: application/json
+
+{
+  "id": 52
+}

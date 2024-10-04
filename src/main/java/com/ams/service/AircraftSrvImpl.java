@@ -15,6 +15,7 @@ import com.ams.dto.PageDataDto;
 import com.ams.dto.SearchDto;
 import com.ams.mappers.*;
 import com.ams.repository.AircraftRep;
+import com.ams.utils.JsonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,11 @@ public class AircraftSrvImpl implements AircraftSrv {
 
     private final AircraftUpdateRqDtoMapper updateRqDtoMapper;
 
+    private static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger(AircraftSrvImpl.class);
+
     @Override
     public AircraftRs getAircrafts(AircraftRq request) {
+        LOGGER.info("getAircrafts: {}", JsonUtils.lazyToJsonString(request));
 
         final SearchDto searchDto = searchMapper.map(request);
 
@@ -60,6 +64,8 @@ public class AircraftSrvImpl implements AircraftSrv {
 
     @Override
     public AircraftAddRs addAircraft(AircraftAddRq request) {
+        LOGGER.info("addAircraft: {}", JsonUtils.lazyToJsonString(request));
+
         final AircraftDto aircraftDto = addRqDtoMapper.map(request);
 
         final Long id = aircraftRep.add(aircraftDto);
@@ -74,6 +80,8 @@ public class AircraftSrvImpl implements AircraftSrv {
 
     @Override
     public AircraftUpdateRs updateAircraft(AircraftUpdateRq request) {
+        LOGGER.info("updateAircraft: {}", JsonUtils.lazyToJsonString(request));
+
         final AircraftDto aircraftDto = updateRqDtoMapper.map(request);
 
         final Long id = aircraftRep.update(aircraftDto);
@@ -88,6 +96,8 @@ public class AircraftSrvImpl implements AircraftSrv {
 
     @Override
     public AircraftDeleteRs deleteAircraft(AircraftDeleteRq request) {
+        LOGGER.info("deleteAircraft: {}", JsonUtils.lazyToJsonString(request));
+
         final AircraftDto aircraftDto = new AircraftDto();
         aircraftDto.setId(request.getId());
 
