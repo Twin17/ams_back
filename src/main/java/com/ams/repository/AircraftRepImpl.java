@@ -11,7 +11,8 @@ import jakarta.persistence.criteria.Root;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.antlr.v4.runtime.misc.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,6 +44,8 @@ public class AircraftRepImpl implements AircraftRep {
     @Value("${paging.default.maxpagesize}")
     private int maxPageSize;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AircraftRepImpl.class);
+
     @Override
     public List<Aircraft> search(SearchDto request, PageDataDto pageData) {
         try {
@@ -69,13 +72,12 @@ public class AircraftRepImpl implements AircraftRep {
 
             return page.getContent();
         } catch (Exception e) {
-            //Logger.getLogger("");
-            //LOGGER
+            LOGGER.error("Ошибка при поиске данных в БД: {}", e.getMessage());
             throw(e);
         }
     }
 
-    private List<Predicate> build(@NonNull CriteriaBuilder cb, @NotNull Root<Aircraft> root, @NonNull SearchDto request) {
+    private List<Predicate> build(@NonNull CriteriaBuilder cb, @NonNull Root<Aircraft> root, @NonNull SearchDto request) {
         final List<Predicate> predicates = new ArrayList<>();
 
         if (request.getModel() != null) {

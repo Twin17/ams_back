@@ -13,11 +13,18 @@ import com.ams.dto.AircraftDto;
 import com.ams.dto.AircraftListDto;
 import com.ams.dto.PageDataDto;
 import com.ams.dto.SearchDto;
-import com.ams.mappers.*;
+import com.ams.mappers.AircraftAddRqDtoMapper;
+import com.ams.mappers.AircraftDtoRsMapper;
+import com.ams.mappers.AircraftEntityDtoMapper;
+import com.ams.mappers.AircraftPagingDtoMapper;
+import com.ams.mappers.AircraftRqSearchMapper;
+import com.ams.mappers.AircraftUpdateRqDtoMapper;
 import com.ams.repository.AircraftRep;
 import com.ams.utils.JsonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,7 +48,7 @@ public class AircraftSrvImpl implements AircraftSrv {
 
     private final AircraftUpdateRqDtoMapper updateRqDtoMapper;
 
-    private static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger(AircraftSrvImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AircraftSrvImpl.class);
 
     @Override
     public AircraftRs getAircrafts(AircraftRq request) {
