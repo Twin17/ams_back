@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: amsfile-table-init #текстовый идентификатор (Обязателен)
+      author: twin # автор (Обязателен)
+      changes:
+        - createTable: # создаем новую таблицу
+            tableName: amsfile
+            columns: # объявления колонок
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: aircraft_id
+                  type: bigint
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: size
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content_type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: data
+                  type: oid
+  - changeSet:
+      id: amsfile-table-seq #текстовый идентификатор (Обязателен)
+      author: twin # автор (Обязателен)
+      changes:
+        - createSequence:
+            sequenceName: amsfile_seq
+            minValue: 1
+            startValue: 1
+            incrementBy: 1
+            cacheSize: 10

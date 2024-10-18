@@ -6,15 +6,23 @@ import com.ams.api.delete.AircraftDeleteRq;
 import com.ams.api.delete.AircraftDeleteRs;
 import com.ams.api.get.AircraftRq;
 import com.ams.api.get.AircraftRs;
+import com.ams.api.get.AmsFilesInfoRq;
+import com.ams.api.get.AmsFilesInfoRs;
 import com.ams.api.update.AircraftUpdateRq;
 import com.ams.api.update.AircraftUpdateRs;
 import com.ams.service.AircraftSrv;
+import com.ams.service.AmsFileSrv;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api")
@@ -23,6 +31,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AircraftController {
 
     private final AircraftSrv aircraftSrv;
+
+    private final AmsFileSrv amsFileSrv;
 
     @PostMapping(value = "/getAircrafts")
     public AircraftRs getAircrafts(@RequestBody AircraftRq request) {
@@ -43,4 +53,21 @@ public class AircraftController {
     public AircraftDeleteRs deleteAircraft(@RequestBody AircraftDeleteRq request) {
         return aircraftSrv.deleteAircraft(request);
     }
+
+    @GetMapping("/amsfile/{id}")
+    public ResponseEntity<byte[]> getAmsFile(@PathVariable Long id) {
+        return amsFileSrv.getAmsFile(id);
+    }
+
+    @PostMapping("/amsfilesinfo")
+    public AmsFilesInfoRs getAmsFilesInfo(@RequestBody AmsFilesInfoRq request) {
+        return amsFileSrv.getAmsFilesInfo(request);
+    }
+
+    @PostMapping("/amsfile/save")
+    public ResponseEntity<String> save(@RequestParam("file") MultipartFile file,
+                                       @RequestParam("aircraft_id") Long aircraftId) {
+        return amsFileSrv.save(file, aircraftId);
+    }
+
 }
