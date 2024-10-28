@@ -11,5 +11,7 @@ public interface AmsFileSrv {
 
     ResponseEntity<byte[]> getAmsFile(Long id);
 
-    ResponseEntity<String> save(MultipartFile file, Long aircraftId);
+    ResponseEntity<byte[]> getAmsMainFile(Long aircraftId);
+
+    ResponseEntity<String> saveAmsFile(MultipartFile file, Long aircraftId);
 }

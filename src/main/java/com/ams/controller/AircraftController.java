@@ -59,15 +59,20 @@ public class AircraftController {
         return amsFileSrv.getAmsFile(id);
     }
 
+    @GetMapping("/amsmainfile/{aircraftId}")
+    public ResponseEntity<byte[]> getAmsMainFile(@PathVariable Long aircraftId) {
+        return amsFileSrv.getAmsMainFile(aircraftId);
+    }
+
     @PostMapping("/amsfilesinfo")
     public AmsFilesInfoRs getAmsFilesInfo(@RequestBody AmsFilesInfoRq request) {
         return amsFileSrv.getAmsFilesInfo(request);
     }
 
     @PostMapping("/amsfile/save")
-    public ResponseEntity<String> save(@RequestParam("file") MultipartFile file,
-                                       @RequestParam("aircraft_id") Long aircraftId) {
-        return amsFileSrv.save(file, aircraftId);
+    public ResponseEntity<String> saveAmsFile(@RequestParam("file") MultipartFile file,
+                                              @RequestParam("aircraft_id") Long aircraftId) {
+        return amsFileSrv.saveAmsFile(file, aircraftId);
     }
 
 }

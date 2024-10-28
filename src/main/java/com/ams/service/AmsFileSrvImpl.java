@@ -55,7 +55,7 @@ public class AmsFileSrvImpl implements AmsFileSrv {
     @Override
     @Transactional(readOnly = true)
     public ResponseEntity<byte[]> getAmsFile(Long id) {
-        LOGGER.info("getAmsFile: {}", JsonUtils.lazyToJsonString(id));
+        LOGGER.info("getAmsFile: {}", id);
 
         Optional<AmsFile> fileEntityOptional = amsFileJpaRep.findById(id);
 
@@ -71,13 +71,34 @@ public class AmsFileSrvImpl implements AmsFileSrv {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public ResponseEntity<byte[]> getAmsMainFile(Long aircraftId) {
+        LOGGER.info("getAmsMainFile: {}", aircraftId);
+
+        final List<AmsFile> amsFiles = amsFileJpaRep.findAmsFilesByAircraftId(aircraftId);
+
+        if (amsFiles.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        AmsFile amsFile = amsFiles.get(0);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + amsFile.getName() + "\"")
+                .contentType(MediaType.valueOf(amsFile.getContentType()))
+                .body(amsFile.getData());
+    }
+
+    @Override
     @Transactional
-    public ResponseEntity<String> save(MultipartFile file, Long aircraftId) {
-        LOGGER.info("file save call");
+    public ResponseEntity<String> saveAmsFile(MultipartFile file, Long aircraftId) {
+        LOGGER.info("saveAmsFile: {}", aircraftId);
 
         try {
             final String fileName = Objects.requireNonNull(file.getOriginalFilename());
             LOGGER.info("file save name: {}, aircraftId: {}", fileName, aircraftId);
+
+            LOGGER.info("deleting files by aircraftId: {}", aircraftId);
+            amsFileJpaRep.deleteAmsFilesByAircraftId(aircraftId);
 
             AmsFile amsFile = new AmsFile();
             amsFile.setAircraftId(aircraftId);

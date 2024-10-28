@@ -11,4 +11,5 @@ public interface AmsFileJpaRep extends JpaRepository<AmsFile, Long> {
 
     List<AmsFile> findAmsFilesByAircraftId(Long aircraftId);
 
+    void deleteAmsFilesByAircraftId(Long aircraftId);
 }

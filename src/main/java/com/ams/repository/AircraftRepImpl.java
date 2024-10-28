@@ -35,6 +35,8 @@ public class AircraftRepImpl implements AircraftRep {
 
     private final AircraftDtoEntityMapper dtoEntityMapper;
 
+    private final AmsFileJpaRep amsFileJpaRep;
+
     @Value("${paging.default.pagenum}")
     private int defPageNum;
 
@@ -113,6 +115,11 @@ public class AircraftRepImpl implements AircraftRep {
 
     @Override
     public void delete(AircraftDto aircraftDto) {
+        final Long aircraftId = aircraftDto.getId();
+
+        LOGGER.info("deleting files for aircraftId: {}", aircraftId);
+        amsFileJpaRep.deleteAmsFilesByAircraftId(aircraftId);
+
         jpaRep.deleteById(aircraftDto.getId());
     }
 
