@@ -10,3 +10,6 @@ GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA ams TO 'ams';
 
 Spring Boot upload file to PostgreSQL database
 https://frontbackend.com/spring-boot/spring-boot-upload-file-to-postgresql-database
+
+By default: H2
+PSQL: mvn spring-boot:run -Dspring-boot.run.profiles=prom
